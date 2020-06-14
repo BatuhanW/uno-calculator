@@ -2,26 +2,26 @@ import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Card from "./components/Card";
+import "bulma/css/bulma.css";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1 1 100%;
   height: 100vh;
+  justify-content: space-between;
 `;
 
 const CardsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 100%;
-  overflow: scroll;
+  overflow-y: scroll;
+  padding-top: 3rem;
+  padding-bottom: 15rem;
 `;
 
-const BottomContainer = styled.div`
-  background-color: #13b4ff;
+const Footer = styled.div`
+  padding: 1.5rem;
+  background-color: #fafafa;
   position: sticky;
   bottom: 0;
-  padding: 20px 15px;
 `;
 
 interface RegisterUserForm {
@@ -41,79 +41,109 @@ function App() {
     setPlayers((players) => [...players, values.playerName]);
     setValue("playerName", "");
   };
-  const [players, setPlayers] = React.useState(["Player 1"]);
+  const [players, setPlayers] = React.useState([
+    "Player 1",
+    "Player 2",
+    "Player 3",
+    "Player 4",
+    "Player 5",
+  ]);
   const [round, setRound] = React.useState(0);
   const [points, setPoints] = React.useState<PlayerPoints[]>([]);
 
   return (
     <Container>
-      <CardsContainer>
-        {players.map((player) => (
-          <Card
-            key={player}
-            player={player}
-            setPlayers={setPlayers}
-            playerPoints={points.filter(
-              (playerPoints) => playerPoints.playerName === player
-            )}
-            setPoints={setPoints}
-            round={round}
-          />
-        ))}
-      </CardsContainer>
-      <BottomContainer>
-        <div>Player Count: {players.length}</div>
-        <div>
-          Round: {round} ||{" "}
-          <button
-            onClick={() => {
-              if (round > 0) {
-                setRound((round) => round - 1);
-              }
-            }}
-          >
-            -
-          </button>{" "}
-          ||{" "}
-          <button
-            onClick={() => {
-              setRound((round) => round + 1);
-            }}
-          >
-            +
-          </button>
-        </div>
-        <div>
-          Winner:{" "}
-          {JSON.stringify(
-            points.reduce((acc: { [key: string]: number }, cumm) => {
-              return {
-                ...acc,
-                [cumm.playerName]: (acc[cumm.playerName] || 0) + cumm.score,
-              };
-            }, {})
-          )}
-        </div>
-        {round === 0 && (
-          <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              Add new player
-              <input
-                type="text"
-                name="playerName"
-                ref={register({
-                  required: "Required",
-                  validate: (value) =>
-                    players.findIndex(
-                      (element) => element.toLowerCase() === value.toLowerCase()
-                    ) === -1,
-                })}
-              />
-              <input type="submit" />
-            </form>
+      <section className="hero is-primary">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">UNO Calculator</h1>
           </div>
-        )}
-      </BottomContainer>
+        </div>
+      </section>
+      <div>
+        <CardsContainer className="px-5">
+          {players.map((player) => (
+            <Card
+              key={player}
+              player={player}
+              setPlayers={setPlayers}
+              playerPoints={points.filter(
+                (playerPoints) => playerPoints.playerName === player
+              )}
+              setPoints={setPoints}
+              round={round}
+            />
+          ))}
+        </CardsContainer>
+      </div>
+      <Footer className="is-family-monospace is-size-5">
+        <div className="content">
+          {round === 0 && (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="field has-addons">
+                <div className="control">
+                  <input
+                    className="input"
+                    placeholder="Add new player"
+                    type="text"
+                    name="playerName"
+                    ref={register({
+                      required: "Required",
+                      validate: (value) =>
+                        players.findIndex(
+                          (element) =>
+                            element.toLowerCase() === value.toLowerCase()
+                        ) === -1,
+                    })}
+                  />
+                </div>
+                <div className="control">
+                  <input className="button is-primary block" type="submit" />
+                </div>
+              </div>
+            </form>
+          )}
+          <div className="my-3" />
+          <span>Player Count: {players.length}</span>
+          <div className="my-3" />
+          <span>
+            Round: {round}
+            <span className="mx-1" />
+            <button
+              className="button is-primary is-small"
+              onClick={() => {
+                if (round > 0) {
+                  setRound((round) => round - 1);
+                }
+              }}
+            >
+              {"<< previous round"}
+            </button>
+            <span className="mx-1" />
+            {players.length > 1 && (
+              <button
+                className="button is-primary is-small"
+                onClick={() => {
+                  setRound((round) => round + 1);
+                }}
+              >
+                {"next round >>"}
+              </button>
+            )}
+          </span>
+          <div className="mt-3">
+            Winner:{" "}
+            {JSON.stringify(
+              points.reduce((acc: { [key: string]: number }, cumm) => {
+                return {
+                  ...acc,
+                  [cumm.playerName]: (acc[cumm.playerName] || 0) + cumm.score,
+                };
+              }, {})
+            )}
+          </div>
+        </div>
+      </Footer>
     </Container>
   );
 }
