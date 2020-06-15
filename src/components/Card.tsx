@@ -62,7 +62,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
             value={
               playerPoints.filter(
                 (point) => point.key === `${player}-${round}`
-              )[0]?.score ?? 0
+              )[0]?.score ?? ""
             }
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const score = Number(event.target.value);
