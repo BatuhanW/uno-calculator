@@ -41,13 +41,7 @@ function App() {
     setPlayers((players) => [...players, values.playerName]);
     setValue("playerName", "");
   };
-  const [players, setPlayers] = React.useState([
-    "Player 1",
-    "Player 2",
-    "Player 3",
-    "Player 4",
-    "Player 5",
-  ]);
+  const [players, setPlayers] = React.useState<string[]>([]);
   const [round, setRound] = React.useState(0);
   const [points, setPoints] = React.useState<PlayerPoints[]>([]);
 

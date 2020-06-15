@@ -1,4 +1,4 @@
-import React, { useEffect, SetStateAction, Dispatch, useState } from "react";
+import React, { SetStateAction, Dispatch } from "react";
 import styled from "styled-components";
 import { PlayerPoints } from "../App";
 
@@ -59,7 +59,11 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
             type="number"
             inputMode="numeric"
             pattern="[0-9]*"
-            value={playerPoints.filter((point) => point.key === `${player}-${round}`)[0]?.score ?? 0}
+            value={
+              playerPoints.filter(
+                (point) => point.key === `${player}-${round}`
+              )[0]?.score ?? 0
+            }
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const score = Number(event.target.value);
 
