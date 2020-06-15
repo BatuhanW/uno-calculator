@@ -103,16 +103,18 @@ function App() {
           <span>
             Round: {round}
             <span className="mx-1" />
-            <button
-              className="button is-primary is-small"
-              onClick={() => {
-                if (round > 0) {
-                  setRound((round) => round - 1);
-                }
-              }}
-            >
-              {"<< previous round"}
-            </button>
+            {round > 0 && (
+              <button
+                className="button is-primary is-small"
+                onClick={() => {
+                  if (round > 0) {
+                    setRound((round) => round - 1);
+                  }
+                }}
+              >
+                {"<< previous round"}
+              </button>
+            )}
             <span className="mx-1" />
             {players.length > 1 && (
               <button
