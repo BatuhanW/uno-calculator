@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Card from "./components/Card";
@@ -44,6 +44,18 @@ function App() {
   const [players, setPlayers] = React.useState<string[]>([]);
   const [round, setRound] = React.useState(0);
   const [points, setPoints] = React.useState<PlayerPoints[]>([]);
+  const pointsChart = useMemo(
+    () =>
+      points.reduce((acc: { [key: string]: number }, cumm) => {
+        return {
+          ...acc,
+          [cumm.playerName]: (acc[cumm.playerName] || 0) + cumm.score,
+        };
+      }, {}),
+    [points]
+  );
+
+  const topScore = Object.values(pointsChart).sort((a, b) => b - a)[0];
 
   return (
     <Container>
@@ -128,15 +140,18 @@ function App() {
             )}
           </span>
           <div className="mt-3">
-            Winner:{" "}
-            {JSON.stringify(
-              points.reduce((acc: { [key: string]: number }, cumm) => {
-                return {
-                  ...acc,
-                  [cumm.playerName]: (acc[cumm.playerName] || 0) + cumm.score,
-                };
-              }, {})
-            )}
+            {console.log(topScore)}
+            {pointsChart &&
+              Object.keys(pointsChart).map((playerName) => (
+                <div key={`player-${playerName}`}>
+                  <span className="is-size-6">{playerName}</span>
+                  <progress
+                    className="progress is-success is-small"
+                    value={pointsChart[playerName]}
+                    max={topScore}
+                  >playerName</progress>
+                </div>
+              ))}
           </div>
         </div>
       </Footer>
