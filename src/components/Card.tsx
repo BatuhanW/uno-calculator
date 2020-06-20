@@ -38,6 +38,9 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
                 setPlayers((players) =>
                   players.filter((value) => value !== player)
                 );
+                setPoints((points) =>
+                  points.filter((value) => value.playerName !== player)
+                );
               }}
             >
               X
