@@ -36,7 +36,8 @@ const Footer: React.FC<FooterProps> = ({
     [points]
   );
 
-  const topScore = Object.values(pointsChart).sort((a, b) => b - a)[0];
+  const topPlayers = Object.entries(pointsChart).sort((a,b) => a[1] - b[1]).slice(0, 2)
+  const topScore = topPlayers[topPlayers.length -1]?.[1] | 0
 
   return (
     <Container className="is-family-monospace is-size-5">
@@ -76,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({
         </span>
         <div className="mt-3">
           {pointsChart &&
-            Object.keys(pointsChart).map((playerName) => (
+            topPlayers.map(topPlayer => topPlayer[0]).map((playerName) => (
               <div key={`player-${playerName}`}>
                 <span className="is-size-6">{playerName}</span>
                 <progress
