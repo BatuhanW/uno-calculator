@@ -2,6 +2,7 @@ import React, { useMemo, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import PlayerForm from "./PlayerForm";
 import { PlayerPoints } from "../App";
+import RoundButton from "./RoundButton";
 
 interface FooterProps {
   round: number;
@@ -23,7 +24,7 @@ const Footer: React.FC<FooterProps> = ({
   players,
   setRound,
   points,
-  setPlayers
+  setPlayers,
 }) => {
   const pointsChart = useMemo(
     () =>
@@ -36,8 +37,10 @@ const Footer: React.FC<FooterProps> = ({
     [points]
   );
 
-  const topPlayers = Object.entries(pointsChart).sort((a,b) => a[1] - b[1]).slice(0, 2)
-  const topScore = topPlayers[topPlayers.length -1]?.[1] | 0
+  const topPlayers = Object.entries(pointsChart)
+    .sort((a, b) => a[1] - b[1])
+    .slice(0, 2);
+  const topScore = topPlayers[topPlayers.length - 1]?.[1] | 0;
 
   return (
     <Container className="is-family-monospace is-size-5">
@@ -51,44 +54,40 @@ const Footer: React.FC<FooterProps> = ({
         <span>
           Round: {round}
           <span className="mx-1" />
-          {round > 0 && (
-            <button
-              className="button is-primary is-small"
-              onClick={() => {
-                if (round > 0) {
-                  setRound((round) => round - 1);
-                }
-              }}
-            >
-              {"<< previous round"}
-            </button>
-          )}
+          <RoundButton
+            condition={round > 0}
+            action={() => {
+              if (round > 0) {
+                setRound((round) => round - 1);
+              }
+            }}
+            text={"<< previous round"}
+          />
           <span className="mx-1" />
-          {players.length > 1 && (
-            <button
-              className="button is-primary is-small"
-              onClick={() => {
-                setRound((round) => round + 1);
-              }}
-            >
-              {"next round >>"}
-            </button>
-          )}
+          <RoundButton
+            condition={players.length > 1}
+            action={() => {
+              setRound((round) => round + 1);
+            }}
+            text={"next round >>"}
+          />
         </span>
         <div className="mt-3">
           {pointsChart &&
-            topPlayers.map(topPlayer => topPlayer[0]).map((playerName) => (
-              <div key={`player-${playerName}`}>
-                <span className="is-size-6">{playerName}</span>
-                <progress
-                  className="progress is-success is-small"
-                  value={pointsChart[playerName]}
-                  max={topScore}
-                >
-                  playerName
-                </progress>
-              </div>
-            ))}
+            topPlayers
+              .map((topPlayer) => topPlayer[0])
+              .map((playerName) => (
+                <div key={`player-${playerName}`}>
+                  <span className="is-size-6">{playerName}</span>
+                  <progress
+                    className="progress is-success is-small"
+                    value={pointsChart[playerName]}
+                    max={topScore}
+                  >
+                    playerName
+                  </progress>
+                </div>
+              ))}
         </div>
       </div>
     </Container>
