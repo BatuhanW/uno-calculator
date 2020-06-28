@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 import Card from "./components/Card";
 import "bulma/css/bulma.css";
-import PlayerForm from "./components/PlayerForm";
+import Footer from './components/Footer';
 
 const Container = styled.div`
   display: flex;
@@ -17,13 +17,6 @@ const CardsContainer = styled.div`
   padding-bottom: 15rem;
 `;
 
-const Footer = styled.div`
-  padding: 1.5rem;
-  background-color: #fafafa;
-  position: sticky;
-  bottom: 0;
-`;
-
 export interface PlayerPoints {
   key: string;
   playerName: string;
@@ -35,18 +28,6 @@ function App() {
   const [players, setPlayers] = React.useState<string[]>([]);
   const [round, setRound] = React.useState(0);
   const [points, setPoints] = React.useState<PlayerPoints[]>([]);
-  const pointsChart = useMemo(
-    () =>
-      points.reduce((acc: { [key: string]: number }, cumm) => {
-        return {
-          ...acc,
-          [cumm.playerName]: (acc[cumm.playerName] || 0) + cumm.score,
-        };
-      }, {}),
-    [points]
-  );
-
-  const topScore = Object.values(pointsChart).sort((a, b) => b - a)[0];
 
   return (
     <Container>
@@ -73,56 +54,13 @@ function App() {
           ))}
         </CardsContainer>
       </div>
-      <Footer className="is-family-monospace is-size-5">
-        <div className="content">
-          {round === 0 && <PlayerForm players={players} setPlayers={setPlayers} />}
-          <div className="my-3" />
-          <span>Player Count: {players.length}</span>
-          <div className="my-3" />
-          <span>
-            Round: {round}
-            <span className="mx-1" />
-            {round > 0 && (
-              <button
-                className="button is-primary is-small"
-                onClick={() => {
-                  if (round > 0) {
-                    setRound((round) => round - 1);
-                  }
-                }}
-              >
-                {"<< previous round"}
-              </button>
-            )}
-            <span className="mx-1" />
-            {players.length > 1 && (
-              <button
-                className="button is-primary is-small"
-                onClick={() => {
-                  setRound((round) => round + 1);
-                }}
-              >
-                {"next round >>"}
-              </button>
-            )}
-          </span>
-          <div className="mt-3">
-            {pointsChart &&
-              Object.keys(pointsChart).map((playerName) => (
-                <div key={`player-${playerName}`}>
-                  <span className="is-size-6">{playerName}</span>
-                  <progress
-                    className="progress is-success is-small"
-                    value={pointsChart[playerName]}
-                    max={topScore}
-                  >
-                    playerName
-                  </progress>
-                </div>
-              ))}
-          </div>
-        </div>
-      </Footer>
+      <Footer
+        round={round}
+        players={players}
+        setRound={setRound}
+        points={points}
+        setPlayers={setPlayers}
+      />
     </Container>
   );
 }
