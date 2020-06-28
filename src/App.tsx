@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
 import Card from "./components/Card";
 import "bulma/css/bulma.css";
+import PlayerForm from "./components/PlayerForm";
 
 const Container = styled.div`
   display: flex;
@@ -24,10 +24,6 @@ const Footer = styled.div`
   bottom: 0;
 `;
 
-interface RegisterUserForm {
-  playerName: string;
-}
-
 export interface PlayerPoints {
   key: string;
   playerName: string;
@@ -36,11 +32,6 @@ export interface PlayerPoints {
 }
 
 function App() {
-  const { handleSubmit, register, setValue } = useForm<RegisterUserForm>();
-  const onSubmit = (values: RegisterUserForm) => {
-    setPlayers((players) => [...players, values.playerName]);
-    setValue("playerName", "");
-  };
   const [players, setPlayers] = React.useState<string[]>([]);
   const [round, setRound] = React.useState(0);
   const [points, setPoints] = React.useState<PlayerPoints[]>([]);
@@ -84,31 +75,7 @@ function App() {
       </div>
       <Footer className="is-family-monospace is-size-5">
         <div className="content">
-          {round === 0 && (
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="field has-addons">
-                <div className="control">
-                  <input
-                    className="input"
-                    placeholder="Add new player"
-                    type="text"
-                    name="playerName"
-                    ref={register({
-                      required: "Required",
-                      validate: (value) =>
-                        players.findIndex(
-                          (element) =>
-                            element.toLowerCase() === value.toLowerCase()
-                        ) === -1,
-                    })}
-                  />
-                </div>
-                <div className="control">
-                  <input className="button is-primary block" type="submit" />
-                </div>
-              </div>
-            </form>
-          )}
+          {round === 0 && <PlayerForm players={players} setPlayers={setPlayers} />}
           <div className="my-3" />
           <span>Player Count: {players.length}</span>
           <div className="my-3" />
@@ -140,7 +107,6 @@ function App() {
             )}
           </span>
           <div className="mt-3">
-            {console.log(topScore)}
             {pointsChart &&
               Object.keys(pointsChart).map((playerName) => (
                 <div key={`player-${playerName}`}>
@@ -149,7 +115,9 @@ function App() {
                     className="progress is-success is-small"
                     value={pointsChart[playerName]}
                     max={topScore}
-                  >playerName</progress>
+                  >
+                    playerName
+                  </progress>
                 </div>
               ))}
           </div>
