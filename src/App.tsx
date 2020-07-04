@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Card from "./components/Card";
 import "bulma/css/bulma.css";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
 
 const Container = styled.div`
   display: flex;
@@ -38,22 +38,20 @@ function App() {
           </div>
         </div>
       </section>
-      <div>
-        <CardsContainer className="px-5">
-          {players.map((player) => (
-            <Card
-              key={player}
-              player={player}
-              setPlayers={setPlayers}
-              playerPoints={points.filter(
-                (playerPoints) => playerPoints.playerName === player
-              )}
-              setPoints={setPoints}
-              round={round}
-            />
-          ))}
-        </CardsContainer>
-      </div>
+      <CardsContainer className="px-5">
+        {players.map((player) => (
+          <Card
+            key={player}
+            player={player}
+            setPlayers={setPlayers}
+            playerPoints={points.filter(
+              (playerPoints) => playerPoints.playerName === player
+            )}
+            setPoints={setPoints}
+            round={round}
+          />
+        ))}
+      </CardsContainer>
       <Footer
         round={round}
         players={players}
