@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Card from "./components/Card";
 import "bulma/css/bulma.css";
 import Footer from "./components/Footer";
+import Hero from './components/Hero';
 
 const Container = styled.div`
   display: flex;
@@ -31,13 +32,7 @@ function App() {
 
   return (
     <Container>
-      <section className="hero is-primary">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">UNO Calculator</h1>
-          </div>
-        </div>
-      </section>
+      <Hero />
       <CardsContainer className="px-5">
         {players.map((player) => (
           <Card
