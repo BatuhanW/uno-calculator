@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useRef } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -16,7 +16,9 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ players, setPlayers }) => {
   const onSubmit = (values: RegisterUserForm) => {
     setPlayers((players) => [...players, values.playerName]);
     setValue("playerName", "");
+    playerNameRef.current?.focus()
   };
+  const playerNameRef = useRef<HTMLInputElement>();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,13 +29,16 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ players, setPlayers }) => {
             placeholder="Add new player"
             type="text"
             name="playerName"
-            ref={register({
-              required: "Required",
-              validate: (value) =>
-                players.findIndex(
-                  (element) => element.toLowerCase() === value.toLowerCase()
-                ) === -1,
-            })}
+            ref={(e: HTMLInputElement) => {
+              register(e, {
+                required: "Required",
+                validate: (value) =>
+                  players.findIndex(
+                    (element) => element.toLowerCase() === value.toLowerCase()
+                  ) === -1,
+              });
+              playerNameRef.current = e
+            }}
           />
         </div>
         <div className="control">
