@@ -32,7 +32,6 @@ export interface PlayerPoints {
 
 function App() {
   const players = useRecoilValue(playersState);
-  const [round, setRound] = React.useState(0);
   const [points, setPoints] = React.useState<PlayerPoints[]>([]);
 
   return (
@@ -47,11 +46,10 @@ function App() {
               (playerPoints) => playerPoints.playerName === player
             )}
             setPoints={setPoints}
-            round={round}
           />
         ))}
       </CardsContainer>
-      <Footer round={round} setRound={setRound} points={points} />
+      <Footer points={points} />
     </Container>
   );
 }
