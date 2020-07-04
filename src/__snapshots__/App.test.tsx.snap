@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Components should render Container 1`] = `
+<div>
+  <div
+    class="sc-AxhCb cfrjRJ"
+  >
+    <section
+      class="hero is-primary"
+    >
+      <div
+        class="hero-body"
+      >
+        <div
+          class="container"
+        >
+          <h1
+            class="title"
+          >
+            UNO Calculator
+          </h1>
+        </div>
+      </div>
+    </section>
+    <div
+      class="sc-AxhUy eECsHo px-5"
+    />
+    <div
+      class="sc-AxiKw fPbTKm is-family-monospace is-size-5"
+    >
+      <div
+        class="content"
+      >
+        <form>
+          <div
+            class="field has-addons"
+          >
+            <div
+              class="control"
+            >
+              <input
+                class="input"
+                name="playerName"
+                placeholder="Add new player"
+                type="text"
+              />
+            </div>
+            <div
+              class="control"
+            >
+              <input
+                class="button is-primary block"
+                type="submit"
+              />
+            </div>
+          </div>
+        </form>
+        <div
+          class="my-3"
+        />
+        <span>
+          Player Count: 
+          0
+        </span>
+        <div
+          class="my-3"
+        />
+        <span>
+          Round: 
+          0
+          <span
+            class="mx-1"
+          />
+          <span />
+          <span
+            class="mx-1"
+          />
+          <span />
+        </span>
+        <div
+          class="mt-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App Snapshot should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-AxhCb cfrjRJ"
+  >
+    <section
+      class="hero is-primary"
+    >
+      <div
+        class="hero-body"
+      >
+        <div
+          class="container"
+        >
+          <h1
+            class="title"
+          >
+            UNO Calculator
+          </h1>
+        </div>
+      </div>
+    </section>
+    <div
+      class="sc-AxhUy eECsHo px-5"
+    />
+    <div
+      class="sc-AxiKw fPbTKm is-family-monospace is-size-5"
+    >
+      <div
+        class="content"
+      >
+        <form>
+          <div
+            class="field has-addons"
+          >
+            <div
+              class="control"
+            >
+              <input
+                class="input"
+                name="playerName"
+                placeholder="Add new player"
+                type="text"
+              />
+            </div>
+            <div
+              class="control"
+            >
+              <input
+                class="button is-primary block"
+                type="submit"
+              />
+            </div>
+          </div>
+        </form>
+        <div
+          class="my-3"
+        />
+        <span>
+          Player Count: 
+          0
+        </span>
+        <div
+          class="my-3"
+        />
+        <span>
+          Round: 
+          0
+          <span
+            class="mx-1"
+          />
+          <span />
+          <span
+            class="mx-1"
+          />
+          <span />
+        </span>
+        <div
+          class="mt-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App Snapshot should render Container 1`] = `
+<div>
+  <div
+    class="sc-AxhCb cfrjRJ"
+  >
+    <section
+      class="hero is-primary"
+    >
+      <div
+        class="hero-body"
+      >
+        <div
+          class="container"
+        >
+          <h1
+            class="title"
+          >
+            UNO Calculator
+          </h1>
+        </div>
+      </div>
+    </section>
+    <div
+      class="sc-AxhUy eECsHo px-5"
+    />
+    <div
+      class="sc-AxiKw fPbTKm is-family-monospace is-size-5"
+    >
+      <div
+        class="content"
+      >
+        <form>
+          <div
+            class="field has-addons"
+          >
+            <div
+              class="control"
+            >
+              <input
+                class="input"
+                name="playerName"
+                placeholder="Add new player"
+                type="text"
+              />
+            </div>
+            <div
+              class="control"
+            >
+              <input
+                class="button is-primary block"
+                type="submit"
+              />
+            </div>
+          </div>
+        </form>
+        <div
+          class="my-3"
+        />
+        <span>
+          Player Count: 
+          0
+        </span>
+        <div
+          class="my-3"
+        />
+        <span>
+          Round: 
+          0
+          <span
+            class="mx-1"
+          />
+          <span />
+          <span
+            class="mx-1"
+          />
+          <span />
+        </span>
+        <div
+          class="mt-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
