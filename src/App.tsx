@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Card from "./components/Card";
 import "bulma/css/bulma.css";
 import Footer from "./components/Footer";
-import Hero from './components/Hero';
+import Hero from "./components/Hero";
 
 const Container = styled.div`
   display: flex;
