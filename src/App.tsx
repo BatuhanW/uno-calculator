@@ -1,9 +1,14 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+
+import { playersState } from "./atoms/states";
+
 import Card from "./components/Card";
-import "bulma/css/bulma.css";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
+
+import "bulma/css/bulma.css";
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +31,7 @@ export interface PlayerPoints {
 }
 
 function App() {
-  const [players, setPlayers] = React.useState<string[]>([]);
+  const players = useRecoilValue(playersState);
   const [round, setRound] = React.useState(0);
   const [points, setPoints] = React.useState<PlayerPoints[]>([]);
 
@@ -38,7 +43,6 @@ function App() {
           <Card
             key={player}
             player={player}
-            setPlayers={setPlayers}
             playerPoints={points.filter(
               (playerPoints) => playerPoints.playerName === player
             )}
@@ -47,13 +51,7 @@ function App() {
           />
         ))}
       </CardsContainer>
-      <Footer
-        round={round}
-        players={players}
-        setRound={setRound}
-        points={points}
-        setPlayers={setPlayers}
-      />
+      <Footer round={round} setRound={setRound} points={points} />
     </Container>
   );
 }

@@ -1,22 +1,23 @@
-import React, { Dispatch, SetStateAction, useRef } from "react";
+import React, { useRef } from "react";
 
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { playersState } from "../atoms/states";
 
-interface PlayerFormProps {
-  players: string[];
-  setPlayers: Dispatch<SetStateAction<string[]>>;
-}
+interface PlayerFormProps {}
 
 interface RegisterUserForm {
   playerName: string;
 }
 
-const PlayerForm: React.FC<PlayerFormProps> = ({ players, setPlayers }) => {
+const PlayerForm: React.FC<PlayerFormProps> = () => {
+  const [players, setPlayers] = useRecoilState(playersState);
+
   const { handleSubmit, register, setValue } = useForm<RegisterUserForm>();
   const onSubmit = (values: RegisterUserForm) => {
-    setPlayers((players) => [...players, values.playerName]);
+    setPlayers((oldPlayers) => [...oldPlayers, values.playerName]);
     setValue("playerName", "");
-    playerNameRef.current?.focus()
+    playerNameRef.current?.focus();
   };
   const playerNameRef = useRef<HTMLInputElement>();
 
@@ -37,7 +38,7 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ players, setPlayers }) => {
                     (element) => element.toLowerCase() === value.toLowerCase()
                   ) === -1,
               });
-              playerNameRef.current = e
+              playerNameRef.current = e;
             }}
           />
         </div>

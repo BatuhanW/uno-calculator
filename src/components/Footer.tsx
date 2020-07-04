@@ -3,13 +3,13 @@ import styled from "styled-components";
 import PlayerForm from "./PlayerForm";
 import { PlayerPoints } from "../App";
 import RoundButton from "./RoundButton";
+import { useRecoilValue } from "recoil";
+import { playersState } from "../atoms/states";
 
 interface FooterProps {
   round: number;
-  players: string[];
   setRound: Dispatch<SetStateAction<number>>;
   points: PlayerPoints[];
-  setPlayers: Dispatch<SetStateAction<string[]>>;
 }
 
 const Container = styled.div`
@@ -19,13 +19,9 @@ const Container = styled.div`
   bottom: 0;
 `;
 
-const Footer: React.FC<FooterProps> = ({
-  round,
-  players,
-  setRound,
-  points,
-  setPlayers,
-}) => {
+const Footer: React.FC<FooterProps> = ({ round, setRound, points }) => {
+  const players = useRecoilValue(playersState);
+
   const pointsChart = useMemo(
     () =>
       points.reduce((acc: { [key: string]: number }, cumm) => {
@@ -45,9 +41,7 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <Container className="is-family-monospace is-size-5">
       <div className="content">
-        {round === 0 && (
-          <PlayerForm players={players} setPlayers={setPlayers} />
-        )}
+        {round === 0 && <PlayerForm />}
         <div className="my-3" />
         <span>Player Count: {players.length}</span>
         <div className="my-3" />

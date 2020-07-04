@@ -1,10 +1,14 @@
 import React, { SetStateAction, Dispatch } from "react";
+
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+
 import { PlayerPoints } from "../App";
+
+import { playersState } from "../atoms/states";
 
 interface CardProps {
   player: string;
-  setPlayers: Dispatch<SetStateAction<string[]>>;
   playerPoints: PlayerPoints[];
   round: number;
   setPoints: Dispatch<SetStateAction<PlayerPoints[]>>;
@@ -22,7 +26,8 @@ const NumberInput = styled.input`
 `;
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-  const { player, setPlayers, playerPoints, round, setPoints } = props;
+  const { player, playerPoints, round, setPoints } = props;
+  const setPlayers = useSetRecoilState(playersState);
 
   return (
     <div className="card mb-5">
