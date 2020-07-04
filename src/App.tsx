@@ -32,24 +32,16 @@ export interface PlayerPoints {
 
 function App() {
   const players = useRecoilValue(playersState);
-  const [points, setPoints] = React.useState<PlayerPoints[]>([]);
 
   return (
     <Container>
       <Hero />
       <CardsContainer className="px-5">
         {players.map((player) => (
-          <Card
-            key={player}
-            player={player}
-            playerPoints={points.filter(
-              (playerPoints) => playerPoints.playerName === player
-            )}
-            setPoints={setPoints}
-          />
+          <Card key={player} player={player} />
         ))}
       </CardsContainer>
-      <Footer points={points} />
+      <Footer />
     </Container>
   );
 }

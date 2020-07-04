@@ -2,14 +2,11 @@ import React, { useMemo } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import styled from "styled-components";
 
-import { playersState, roundState } from "../atoms/states";
+import { playersState, roundState, pointsState } from "../atoms/states";
 import PlayerForm from "./PlayerForm";
-import { PlayerPoints } from "../App";
 import RoundButton from "./RoundButton";
 
-interface FooterProps {
-  points: PlayerPoints[];
-}
+interface FooterProps {}
 
 const Container = styled.div`
   padding: 1.5rem;
@@ -18,9 +15,10 @@ const Container = styled.div`
   bottom: 0;
 `;
 
-const Footer: React.FC<FooterProps> = ({ points }) => {
+const Footer: React.FC<FooterProps> = () => {
   const players = useRecoilValue(playersState);
   const [round, setRound] = useRecoilState(roundState);
+  const points = useRecoilValue(pointsState);
 
   const pointsChart = useMemo(
     () =>
