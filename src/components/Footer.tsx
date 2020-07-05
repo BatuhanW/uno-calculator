@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { playersState, roundState, pointsState } from "../atoms/states";
 import PlayerForm from "./PlayerForm";
 import RoundButton from "./RoundButton";
+import { useResetApp } from "../hooks/useResetApp";
 
 interface FooterProps {}
 
@@ -19,6 +20,7 @@ const Footer: React.FC<FooterProps> = () => {
   const players = useRecoilValue(playersState);
   const [round, setRound] = useRecoilState(roundState);
   const points = useRecoilValue(pointsState);
+  const { reset } = useResetApp();
 
   const pointsChart = useMemo(
     () =>
@@ -41,7 +43,10 @@ const Footer: React.FC<FooterProps> = () => {
       <div className="content">
         {round === 0 && <PlayerForm />}
         <div className="my-3" />
-        <span>Player Count: {players.length}</span>
+        <span>Player Count: {players.length}</span> |{" "}
+        <button className="button is-small is-danger" onClick={reset}>
+          X
+        </button>
         <div className="my-3" />
         <span>
           Round: {round}
