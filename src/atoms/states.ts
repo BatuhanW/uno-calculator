@@ -9,3 +9,9 @@ export const pointsState = atom<PlayerPoints[]>({
   key: "points",
   default: [],
 });
+
+export const stateMap = {
+  players: playersState,
+  round: roundState,
+  points: pointsState,
+};
