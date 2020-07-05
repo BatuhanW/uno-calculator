@@ -10,10 +10,11 @@ ReactDOM.render(
     <RecoilRoot
       initializeState={(snapshot) => {
         Object.entries(stateMap).map(([name, state]) => {
-          snapshot.set(
-            state,
-            JSON.parse(localStorage.getItem(name) || "{}").contents
-          );
+          const { contents } = JSON.parse(localStorage.getItem(name) || "{}");
+
+          if (contents) {
+            snapshot.set(state, contents);
+          }
         });
       }}
     >
