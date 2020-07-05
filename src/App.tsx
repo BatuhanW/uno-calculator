@@ -1,8 +1,8 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilTransactionObserver_UNSTABLE } from "recoil";
 import styled from "styled-components";
 
-import { playersState } from "./atoms/states";
+import { playersState, roundState, pointsState } from "./atoms/states";
 
 import Card from "./components/Card";
 import Footer from "./components/Footer";
@@ -32,6 +32,16 @@ export interface PlayerPoints {
 
 function App() {
   const players = useRecoilValue(playersState);
+
+  useRecoilTransactionObserver_UNSTABLE(({ snapshot, previousSnapshot }) => {
+    const players = snapshot.getLoadable(playersState);
+    const round = snapshot.getLoadable(roundState);
+    const points = snapshot.getLoadable(pointsState);
+
+    localStorage.setItem("players", JSON.stringify(players));
+    localStorage.setItem("round", JSON.stringify(round));
+    localStorage.setItem("points", JSON.stringify(points));
+  });
 
   return (
     <Container>
