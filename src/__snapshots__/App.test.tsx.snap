@@ -40,6 +40,7 @@ exports[`App Snapshot should match snapshot 1`] = `
             >
               <input
                 class="input"
+                data-cy="newPlayerInput"
                 name="playerName"
                 placeholder="Add new player"
                 type="text"
@@ -50,6 +51,7 @@ exports[`App Snapshot should match snapshot 1`] = `
             >
               <input
                 class="button is-primary block"
+                data-cy="newPlayerSubmit"
                 type="submit"
               />
             </div>
@@ -62,6 +64,13 @@ exports[`App Snapshot should match snapshot 1`] = `
           Player Count: 
           0
         </span>
+         |
+         
+        <button
+          class="button is-small is-danger"
+        >
+          X
+        </button>
         <div
           class="my-3"
         />
