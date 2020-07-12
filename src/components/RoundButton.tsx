@@ -12,7 +12,11 @@ const RoundButton: React.FC<RoundButtonProps> = ({
   text,
 }) => {
   return condition ? (
-    <button className="button is-primary is-small" onClick={action}>
+    <button
+      data-cy="roundButton"
+      className="button is-primary is-small"
+      onClick={action}
+    >
       {text}
     </button>
   ) : (

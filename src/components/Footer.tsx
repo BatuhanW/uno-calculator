@@ -75,7 +75,9 @@ const Footer: React.FC<FooterProps> = () => {
               .map((topPlayer) => topPlayer[0])
               .map((playerName) => (
                 <div key={`player-${playerName}`}>
-                  <span className="is-size-6">{playerName}</span>
+                  <span data-cy="topPlayers" className="is-size-6">
+                    {playerName}
+                  </span>
                   <progress
                     className="progress is-success is-small"
                     value={pointsChart[playerName]}

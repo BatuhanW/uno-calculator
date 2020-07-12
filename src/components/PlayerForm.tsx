@@ -26,6 +26,7 @@ const PlayerForm: React.FC<PlayerFormProps> = () => {
       <div className="field has-addons">
         <div className="control">
           <input
+            data-cy="newPlayerInput"
             className="input"
             placeholder="Add new player"
             type="text"
@@ -43,7 +44,11 @@ const PlayerForm: React.FC<PlayerFormProps> = () => {
           />
         </div>
         <div className="control">
-          <input className="button is-primary block" type="submit" />
+          <input
+            className="button is-primary block"
+            data-cy="newPlayerSubmit"
+            type="submit"
+          />
         </div>
       </div>
     </form>

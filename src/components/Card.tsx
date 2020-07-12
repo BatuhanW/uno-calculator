@@ -35,11 +35,14 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     <div className="card mb-5">
       <CardHeader className="card-header">
         <div>
-          <p className="card-header-title">{player}</p>
+          <p className="card-header-title" data-cy="playerName">
+            {player}
+          </p>
         </div>
         <div>
           <div className="card-header-title">
             <button
+              data-cy="removePlayer"
               className="button is-danger is-small"
               onClick={() => {
                 setPlayers((players) =>
@@ -56,7 +59,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         </div>
       </CardHeader>
       <div className="card-content">
-        <div className="subtitle">
+        <div className="subtitle" data-cy="roundScore">
           {playerPoints?.map((playerPoint) => (
             <div key={playerPoint.key}>
               Round {playerPoint.round}: <b>{playerPoint.score}</b>
@@ -66,6 +69,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
 
         {round > 0 && (
           <NumberInput
+            data-cy="scoreInput"
             type="number"
             inputMode="numeric"
             pattern="[0-9]*"
@@ -92,7 +96,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           />
         )}
         <div className="card-footer">
-          <div className="card-footer-item">
+          <div className="card-footer-item" data-cy="totalScore">
             Total Score:{" "}
             {playerPoints?.reduce((acc, curr) => acc + curr.score, 0) || 0}
           </div>
